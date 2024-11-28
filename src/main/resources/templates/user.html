@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Users</title>
+    </head>
+    <body>
+        <h2>Liste des utilisateurs: </h2>
+        <p th:text="${#lists.size(usersList)}"></p>
+        <table border="1px">
+            <tr>
+                <td>id_user</td>
+                <td>registration</td>
+                <td>lastname</td>
+                <td>firstname</td>
+                <td>role_user</td>
+                <td>password.user</td>
+            </tr>
+            <tr>
+                <td th:text="${user.id_user}"></td>
+                <td th:text="${user.registration}"></td>
+                <td th:text="${user.lastname}"></td>
+                <td th:text="${user.firstname}"></td>
+                <td th:text="${user.role_user}"></td>
+                <td th:text="${user.password.user}"></td>
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>
