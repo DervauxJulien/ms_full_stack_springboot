@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Demande d'intervention</title>
+    </head>
+    <body>
+        <form method="post" th:action="@{/submitDemande}">
+            <textarea cols="50" rows="30" name="description"></textarea>
+            <div style="margin:20px auto">
+                <input type="submit" value="Valider">
+            </div>
+
+
+        </form>
+
+
+    </body>
+</html>
