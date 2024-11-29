@@ -2,11 +2,10 @@
 <html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
-        <title>Users</title>
+        <title>User</title>
     </head>
     <body>
-        <h2>Liste des utilisateurs: </h2>
-        <p th:text="${#lists.size(usersList)}"></p>
+        <h2>Information de l'utilisateur : <span th:text = "${user.lastname} +' '+ ${user.firstname}"> </span> </h2>
         <table border="1px">
             <tr>
                 <td>id_user</td>
@@ -22,7 +21,7 @@
                 <td th:text="${user.lastname}"></td>
                 <td th:text="${user.firstname}"></td>
                 <td th:text="${user.role_user}"></td>
-                <td th:text="${user.password.user}"></td>
+                <td th:text="${user.password_user}"></td>
             </tr>
 
         </table>

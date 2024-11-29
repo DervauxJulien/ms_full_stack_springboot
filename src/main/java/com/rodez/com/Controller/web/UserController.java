@@ -34,10 +34,13 @@ public class UserController {
      */
     @GetMapping("/users/{id}")
     public String getUserById(@PathVariable( "id") Integer id, Model model){
-         Optional user =  userService.getUserById(id);
+        User user =   userService.getUserById(id).orElse(null);
         model.addAttribute("user", user);
         return "user";
     }
+
+
+
 
 
 }

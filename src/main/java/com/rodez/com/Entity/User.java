@@ -10,7 +10,7 @@ public class User {
     @Column(name="id_user")
     private int id_user;
     @Column(name="registration")
-    private int resgistration;
+    private int registration;
     @Column(name="lastname")
     private String lastname;
     @Column(name="firstname")
@@ -28,12 +28,12 @@ public class User {
         this.id_user = id_user;
     }
 
-    public int getResgistration() {
-        return resgistration;
+    public int getRegistration() {
+        return registration;
     }
 
-    public void setResgistration(int resgistration) {
-        this.resgistration = resgistration;
+    public void setRegistration(int resgistration) {
+        this.registration = resgistration;
     }
 
     public String getLastname() {
