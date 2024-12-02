@@ -8,6 +8,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_location;
+    @Column(name="name_location")
     private String name_location;
 
     public int getId_location() {

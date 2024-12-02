@@ -18,8 +18,12 @@ public class Intervention {
     private String priority;
     private String status;
     private String description;
-    private int id_user;
-    private int id_location;
+    @ManyToOne
+    @JoinColumn(name="id_user")
+    private User id_user;
+    @OneToOne
+    @JoinColumn(name="id_location")
+    private Location id_location;
 
     public int getId_intervention() {
         return id_intervention;
@@ -85,19 +89,19 @@ public class Intervention {
         this.description = description;
     }
 
-    public int getId_user() {
+    public User getId_user() {
         return id_user;
     }
 
-    public void setId_user(int id_user) {
+    public void setId_user(User id_user) {
         this.id_user = id_user;
     }
 
-    public int getId_location() {
+    public Location getId_location() {
         return id_location;
     }
 
-    public void setId_location(int id_location) {
+    public void setId_location(Location id_location) {
         this.id_location = id_location;
     }
 }

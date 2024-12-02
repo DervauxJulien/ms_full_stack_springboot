@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Liste des interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>date</td>
+                <td>date de creation</td>
+                <td>date de réalisation</td>
+                <td>date d'affectation</td>
+                <td>priorité</td>
+                <td>Status</td>
+                <td>description</td>
+                <td>Id User</td>
+                <td>Id location</td>
+            </tr>
+            <tr th:each="intervention : ${interventionsList}">
+                <td th:text="${intervention.date}"></td>
+                <td th:text="${intervention.creation_date}"></td>
+                <td th:text="${intervention.realisation_date}"></td>
+                <td th:text="${intervention.affectation_date}"></td>
+                <td th:text="${intervention.priority}"></td>
+                <td th:text="${intervention.status}"></td>
+                <td th:text="${intervention.description}"></td>
+                <td th:text="${intervention.id_user.id_user}"></td>
+                <td th:text="${intervention.id_location.id_location}"></td>
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>

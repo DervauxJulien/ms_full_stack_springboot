@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -28,6 +29,8 @@ public class UserController {
         model.addAttribute("usersList",users);
         return "users";
 
+
+
     }
     /*
         function to fin user by id
@@ -36,6 +39,7 @@ public class UserController {
     public String getUserById(@PathVariable( "id") Integer id, Model model){
         User user =   userService.getUserById(id).orElse(null);
         model.addAttribute("user", user);
+
         return "user";
     }
 

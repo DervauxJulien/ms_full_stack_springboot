@@ -1,7 +1,7 @@
 package com.rodez.com.Service;
 
 import com.rodez.com.Entity.User;
-import com.rodez.com.Repository.UserRepositoryInterface;
+import com.rodez.com.Repository.users.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

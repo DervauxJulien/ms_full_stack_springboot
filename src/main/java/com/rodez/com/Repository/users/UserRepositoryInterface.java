@@ -1,4 +1,4 @@
-package com.rodez.com.Repository;
+package com.rodez.com.Repository.users;
 
 import com.rodez.com.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

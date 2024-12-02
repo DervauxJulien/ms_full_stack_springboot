@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Mes demandes d'interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>date</td>
+                <td>date de creation</td>
+                <td>date de réalisation</td>
+
+                <td>priorité</td>
+                <td>Status</td>
+                <td>description</td>
+                <td>Id User</td>
+                <td>Id location</td>
+            </tr>
+            <tr th:each="request : ${myRequest}">
+                <td th:text="${#dates.formatISO(request.date)}"></td>
+                <td th:text="${#dates.formatISO(request.creation_date)}"></td>
+                <td th:text="${#dates.formatISO(request.realisation_date)}"></td>
+
+                <td th:text="${request.priority}"></td>
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.description}"></td>
+                <td th:text="${request.id_user.id_user}"></td>
+                <td th:text="${request.id_location.id_location}"></td>
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>
