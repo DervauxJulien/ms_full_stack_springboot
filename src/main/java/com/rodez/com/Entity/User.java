@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="\"USER\"")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +16,12 @@ public class User {
     private String lastname;
     @Column(name="firstname")
     private String firstname;
+
     @Column(name="role_user")
     private String role_user;
     @Column(name="password_user")
     private String password_user;
+
 
     public int getId_user() {
         return id_user;

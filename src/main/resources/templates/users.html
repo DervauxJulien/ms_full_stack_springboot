@@ -14,6 +14,7 @@
                 <td>lastname</td>
                 <td>firstname</td>
                 <td>role_user</td>
+                <td>Action</td>
             </tr>
             <tr th:each="user : ${usersList}">
                 <td><a th:href="@{/users/{id}(id=${user.id_user})}" th:text="${user.id_user}" ></a></td>
@@ -21,6 +22,12 @@
                 <td th:text="${user.lastname}"></td>
                 <td th:text="${user.firstname}"></td>
                 <td th:text="${user.role_user}"></td>
+                <td><form th:action="@{/delete_user/{id} (id=${user.id_user})}" method="delete">
+                    <button type="submit">Delete</button>
+                </form>
+                </td>
+
+
             </tr>
 
         </table>

@@ -15,26 +15,38 @@
                 <td>priorité</td>
                 <td>Prise en charge</td>
                 <td>Réalisé</td>
+<!--
+                <td>date de réalisation</td>
+                <td>date d'affectation</td>
+                <td>Status</td>
+                <td>Id location</td>
+                <td>date</td>
+                -->
             </tr>
-            <tr th:each="intervention : ${interventionsList}">
-                <td ><a th:text="${intervention.id_intervention}" th:href="@{/interventions_admin/{id}(id=${intervention.id_intervention})}"></a></td>
+            <tr>
+                <td th:text="${intervention.id_intervention}" ></td>
                 <td th:text="${intervention.description}"></td>
                 <td th:text="${intervention.id_user.firstname}"></td>
                 <td th:text="${intervention.creation_date}"></td>
                 <td th:text="${intervention.priority}"></td>
                 <td >
-                    <select name="intervenant" >
-                        <option th:if="${intervention.id_intervenant == null}" value="" selected >Choisir un intervenant</option>
-
-                        <option th:each="intervenant : ${intervenants}"
-                                th:value="${intervenant.id_user}"
-                                th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
-                                th:selected="${intervention.id_intervenant != null and intervention.id_intervenant.id_user == intervenant.id_user}">
-                        </option>
-                    </select>
+                    <span th:if="${intervention.id_intervenant == null }"></span>
+                    <span th:unless="${intervention.id_intervenant == null}" th:text="${intervention.id_intervenant.firstname}+ ' ' +${intervention.id_intervenant.lastname} "></span>
                 </td>
                 <td th:text="${intervention.status}"></td>
+
+
+<!--
+                <td th:text="${intervention.date}"></td>
+                <td th:text="${intervention.realisation_date}"></td>
+                <td th:text="${intervention.affectation_date}"></td>
+                <td th:text="${intervention.id_location.id_location}"></td>
+
+                -->
             </tr>
+
         </table>
+
+
     </body>
 </html>

@@ -18,6 +18,11 @@ public class Intervention {
     private String priority;
     private String status;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name="id_intervenant")
+    private User id_intervenant;
+
     @ManyToOne
     @JoinColumn(name="id_user")
     private User id_user;
@@ -25,6 +30,16 @@ public class Intervention {
     @JoinColumn(name="id_location")
     private Location id_location;
 
+
+
+
+    public User getId_intervenant() {
+        return id_intervenant;
+    }
+
+    public void setId_intervenant(User id_intervenant) {
+        this.id_intervenant = id_intervenant;
+    }
     public int getId_intervention() {
         return id_intervention;
     }
