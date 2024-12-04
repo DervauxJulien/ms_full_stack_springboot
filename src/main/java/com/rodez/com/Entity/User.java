@@ -1,6 +1,11 @@
 package com.rodez.com.Entity;
 
+import com.rodez.com.Validator.ImmatriculationValidatorInterface;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name="\"USER\"")
@@ -10,10 +15,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUser")
     private int idUser;
+    @NotNull(message = "Immatriculation obligatoire")
+
+    @ImmatriculationValidatorInterface(regex = "[A,U,P,F][0-9]{9}")
     @Column(name="registration")
-    private int registration;
+    private Integer registration;
+    @NotBlank(message = "Nom obligatoire")
     @Column(name="lastname")
     private String lastname;
+    @NotBlank(message = "Prénom obligatoire")
     @Column(name="firstname")
     private String firstname;
 
@@ -31,11 +41,11 @@ public class User {
         this.idUser = idUser;
     }
 
-    public int getRegistration() {
+    public Integer getRegistration() {
         return registration;
     }
 
-    public void setRegistration(int resgistration) {
+    public void setRegistration(Integer resgistration) {
         this.registration = resgistration;
     }
 

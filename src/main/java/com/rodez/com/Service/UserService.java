@@ -33,19 +33,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
     public User updateUser(User user){
-//        //Optional<User> user = userRepository.findById(id);
-//        User user = userRepository.findById(user_maj.getId_user()).get();
-//        user.setRole_user(user_maj.getRole_user());
-//        user.setPassword_user(user_maj.getPassword_user());
-//        user.setRegistration(user_maj.getRegistration());
-//        user.setFirstname(user_maj.getFirstname());
-//        user.setLastname(user_maj.getLastname());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getIdUser());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getFirstname());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getLastname());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getPasswordUser());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getRoleUser());
-        System.out.println("--------------------------------------------------------------------------------------"+user.getRegistration());
         return userRepository.save(user);
     }
 

@@ -5,19 +5,23 @@
         <title>Home</title>
     </head>
     <body>
-        <form method="post" th:action="@{/submitForm}">
+        <form method="post" th:action="@{/submitForm}" th:object="${user}">
             <table>
                 <tr>
-                    <td><label>Immatriculation :</label></td>
-                    <td><input type="text" name="immatriculation"></td>
+                    <td><label for="immatriculation">Immatriculation :</label></td>
+                    <td><input id ="immatriculation" type="text"  th:field="*{registration}" th:value="${user.registration}"></td>
+                    <td th:if="${#fields.hasErrors('registration')}" th:errors="*{registration}"></td>
+
                 </tr>
                 <tr>
-                    <td><label>Nom : </label></td>
-                    <td><input type="text" name="nom"></td>
+                    <td><label for="nom">Nom : </label></td>
+                    <td><input id="nom" type="text" th:field="*{lastname}" th:value="${user.lastname}"></td>
+                    <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></td>
                 </tr>
                 <tr>
-                    <td><label>Prénom :</label></td>
-                    <td><input type="text" name="prenom"></td>
+                    <td><label for="prenom">Prénom :</label></td>
+                    <td><input id="prenom" type="text" th:field="*{firstname}" th:value="${user.firstname}"></td>
+                    <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></td>
                 </tr>
 
 
