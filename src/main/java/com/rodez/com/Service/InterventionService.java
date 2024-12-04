@@ -30,4 +30,8 @@ public class InterventionService {
     public Optional <Intervention> getById(Integer id){
         return  interventionRepository.findById(id);
     }
+
+    public Intervention createIntervention(Intervention intervention) {
+        return interventionRepository.save(intervention);
+    }
 }

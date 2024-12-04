@@ -20,14 +20,14 @@
             </tr>
             <tr th:each="request : ${myRequest}">
                 <td th:text="${#dates.formatISO(request.date)}"></td>
-                <td th:text="${#dates.formatISO(request.creation_date)}"></td>
-                <td th:text="${#dates.formatISO(request.realisation_date)}"></td>
+                <td th:text="${#dates.formatISO(request.creationDate)}"></td>
+                <td th:text="${#dates.formatISO(request.realisationDate)}"></td>
 
                 <td th:text="${request.priority}"></td>
                 <td th:text="${request.status}"></td>
                 <td th:text="${request.description}"></td>
-                <td th:text="${request.id_user.id_user}"></td>
-                <td th:text="${request.id_location.id_location}"></td>
+                <td th:text="${request.idUser.idUser}"></td>
+                <td th:text="${request.idLocation.idLocation}"></td>
             </tr>
 
         </table>

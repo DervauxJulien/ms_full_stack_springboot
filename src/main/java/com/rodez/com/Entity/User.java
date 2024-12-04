@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_user")
-    private int id_user;
+    @Column(name="idUser")
+    private int idUser;
     @Column(name="registration")
     private int registration;
     @Column(name="lastname")
@@ -17,18 +17,18 @@ public class User {
     @Column(name="firstname")
     private String firstname;
 
-    @Column(name="role_user")
-    private String role_user;
-    @Column(name="password_user")
-    private String password_user;
+    @Column(name="roleUser")
+    private String roleUser;
+    @Column(name="passwordUser")
+    private String passwordUser;
 
 
-    public int getId_user() {
-        return id_user;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public int getRegistration() {
@@ -55,19 +55,19 @@ public class User {
         this.firstname = firstname;
     }
 
-    public String getRole_user() {
-        return role_user;
+    public String getRoleUser() {
+        return roleUser;
     }
 
-    public void setRole_user(String role_user) {
-        this.role_user = role_user;
+    public void setRoleUser(String roleUser) {
+        this.roleUser = roleUser;
     }
 
-    public String getPassword_user() {
-        return password_user;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setPassword_user(String password_user) {
-        this.password_user = password_user;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 }

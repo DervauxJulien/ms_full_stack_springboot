@@ -1,18 +1,16 @@
 package com.rodez.com.Controller.api;
 
 import com.rodez.com.Entity.Intervention;
+import com.rodez.com.Entity.User;
 import com.rodez.com.Service.InterventionService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-
 public class InterventionRestController {
     @Autowired
     InterventionService interventionService = new InterventionService();
@@ -26,6 +24,12 @@ public class InterventionRestController {
         return interventionService.getById(id);
     }
 
+    @PostMapping("/create_intervention_rest")
+
+    public Intervention createIntervention(@RequestBody Intervention intervention){
+        return interventionService.createIntervention(intervention);
+
+    }
 
 
 }

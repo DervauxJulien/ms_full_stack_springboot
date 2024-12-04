@@ -17,19 +17,19 @@
                 <td>Réalisé</td>
             </tr>
             <tr th:each="intervention : ${interventionsList}">
-                <td ><a th:text="${intervention.id_intervention}" th:href="@{/interventions_admin/{id}(id=${intervention.id_intervention})}"></a></td>
+                <td ><a th:text="${intervention.idIntervention}" th:href="@{/interventions_admin/{id}(id=${intervention.idIntervention})}"></a></td>
                 <td th:text="${intervention.description}"></td>
-                <td th:text="${intervention.id_user.firstname}"></td>
-                <td th:text="${intervention.creation_date}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
+                <td th:text="${intervention.creationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
                 <td >
                     <select name="intervenant" >
-                        <option th:if="${intervention.id_intervenant == null}" value="" selected >Choisir un intervenant</option>
+                        <option th:if="${intervention.idIntervenant == null}" value="" selected >Choisir un intervenant</option>
 
                         <option th:each="intervenant : ${intervenants}"
-                                th:value="${intervenant.id_user}"
+                                th:value="${intervenant.idUser}"
                                 th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
-                                th:selected="${intervention.id_intervenant != null and intervention.id_intervenant.id_user == intervenant.id_user}">
+                                th:selected="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == intervenant.idUser}">
                         </option>
                     </select>
                 </td>

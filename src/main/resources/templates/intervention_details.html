@@ -24,14 +24,14 @@
                 -->
             </tr>
             <tr>
-                <td th:text="${intervention.id_intervention}" ></td>
+                <td th:text="${intervention.idIntervention}" ></td>
                 <td th:text="${intervention.description}"></td>
-                <td th:text="${intervention.id_user.firstname}"></td>
-                <td th:text="${intervention.creation_date}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
+                <td th:text="${intervention.creationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
                 <td >
-                    <span th:if="${intervention.id_intervenant == null }"></span>
-                    <span th:unless="${intervention.id_intervenant == null}" th:text="${intervention.id_intervenant.firstname}+ ' ' +${intervention.id_intervenant.lastname} "></span>
+                    <span th:if="${intervention.idIntervenant == null }"></span>
+                    <span th:unless="${intervention.idIntervenant == null}" th:text="${intervention.idIntervenant.firstname}+ ' ' +${intervention.idIntervenant.lastname} "></span>
                 </td>
                 <td th:text="${intervention.status}"></td>
 

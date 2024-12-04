@@ -20,14 +20,14 @@
             </tr>
             <tr th:each="intervention : ${interventionsList}">
                 <td th:text="${intervention.date}"></td>
-                <td th:text="${intervention.creation_date}"></td>
-                <td th:text="${intervention.realisation_date}"></td>
-                <td th:text="${intervention.affectation_date}"></td>
+                <td th:text="${intervention.creationDate}"></td>
+                <td th:text="${intervention.realisationDate}"></td>
+                <td th:text="${intervention.affectationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
                 <td th:text="${intervention.status}"></td>
                 <td th:text="${intervention.description}"></td>
-                <td th:text="${intervention.id_user.id_user}"></td>
-                <td th:text="${intervention.id_location.id_location}"></td>
+                <td th:text="${intervention.idUser.idUser}"></td>
+                <td th:text="${intervention.idLocation.idLocation}"></td>
             </tr>
 
         </table>
