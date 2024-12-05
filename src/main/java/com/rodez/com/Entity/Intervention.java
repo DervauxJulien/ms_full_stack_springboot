@@ -1,6 +1,8 @@
 package com.rodez.com.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
 
@@ -16,7 +18,8 @@ public class Intervention {
     private Timestamp realisationDate;
     private Timestamp affectationDate;
     private String priority;
-    private String status;
+    private String status = "en attente";
+    @NotBlank(message = "Une intervention doit avoir une description")
     private String description;
 
     @ManyToOne
@@ -28,6 +31,7 @@ public class Intervention {
     private User idUser;
     @OneToOne
     @JoinColumn(name="idLocation")
+    @NotNull(message = "La localisation ne doit pas être null")
     private Location idLocation;
 
 

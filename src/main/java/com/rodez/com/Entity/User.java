@@ -15,15 +15,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUser")
     private int idUser;
-    @NotNull(message = "Immatriculation obligatoire")
-
-    @ImmatriculationValidatorInterface(regex = "[A,U,P,F][0-9]{9}")
+    @ImmatriculationValidatorInterface(regex = "^[A,U,P,F]+[0-9]{9}$", message = "Mauvais format d'immatriculation")
     @Column(name="registration")
-    private Integer registration;
-    @NotBlank(message = "Nom obligatoire")
+    private String registration;
+    @ImmatriculationValidatorInterface(regex = "^[A-Za-z]+$", message = "Mauvais format de nom")
     @Column(name="lastname")
     private String lastname;
-    @NotBlank(message = "Prénom obligatoire")
+    @ImmatriculationValidatorInterface(regex = "^[A-Za-z]+$", message = "Mauvais format de prénom")
     @Column(name="firstname")
     private String firstname;
 
@@ -41,11 +39,11 @@ public class User {
         this.idUser = idUser;
     }
 
-    public Integer getRegistration() {
+    public String getRegistration() {
         return registration;
     }
 
-    public void setRegistration(Integer resgistration) {
+    public void setRegistration(String resgistration) {
         this.registration = resgistration;
     }
 

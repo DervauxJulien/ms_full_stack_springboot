@@ -5,8 +5,21 @@
         <title>Demande d'intervention</title>
     </head>
     <body>
-        <form method="post" th:action="@{/submitDemande}">
-            <textarea cols="50" rows="30" name="description"></textarea>
+        <form method="post" th:action="@{/submitDemande}" th:object="${intervention}">
+            <div>
+                <select name="location" th:field="*{idLocation}">
+                    <option selected  value="">Choisir une localisation</option>
+                    <option th:each="location : ${locationList}"
+                            th:value="${location.idLocation}"
+                            th:text="${location.nameLocation}">
+                    </option>
+                </select>
+                <p th:if="${#fields.hasErrors('idLocation')}" th:errors="*{idLocation}"></p>
+            </div>
+            <div>
+                <textarea cols="50" rows="30" th:field="*{description}"></textarea>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+            </div>
             <div style="margin:20px auto">
                 <input type="submit" value="Valider">
             </div>

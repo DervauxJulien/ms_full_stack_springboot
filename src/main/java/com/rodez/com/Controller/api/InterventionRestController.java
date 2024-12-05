@@ -15,11 +15,11 @@ public class InterventionRestController {
     @Autowired
     InterventionService interventionService = new InterventionService();
 
-    @GetMapping("interventions_admin_rest")
+    @GetMapping("/interventions_admin_rest")
     public Iterable<Intervention> interventionList (){
         return interventionService.getAll();
     }
-    @GetMapping("interventions_admin_rest/{id}")
+    @GetMapping("/interventions_admin_rest/{id}")
     public Optional<Intervention> interventionId (@PathVariable("id") Integer id){
         return interventionService.getById(id);
     }
