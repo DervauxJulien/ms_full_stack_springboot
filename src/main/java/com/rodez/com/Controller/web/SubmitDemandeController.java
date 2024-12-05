@@ -4,6 +4,7 @@ import com.rodez.com.Entity.Intervention;
 import com.rodez.com.Entity.Location;
 import com.rodez.com.Entity.User;
 import com.rodez.com.Service.LocationService;
+import com.rodez.com.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 import java.awt.*;
+import java.util.Optional;
 
 @Controller
 public class SubmitDemandeController {
@@ -21,6 +23,8 @@ public class SubmitDemandeController {
 
     @Autowired
     private LocationService locationService;
+    @Autowired
+    private UserService userService;
     @PostMapping("/submitDemande")
     public String confirmdemande (@Valid @ModelAttribute ("intervention") Intervention intervention, BindingResult bindingResult, Model model) {
 
@@ -31,8 +35,9 @@ public class SubmitDemandeController {
             model.addAttribute("locationList", locations);
             return "demande_intervention";
         } else {
-            User user = (User) session.getAttribute("user");
-            intervention.setIdUser(user);
+            Integer id = (Integer) session.getAttribute("idUser");
+            Optional<User> user = userService.getUserById(id);
+            intervention.setIdUser(user.get());
             model.addAttribute("intervention", intervention);
             return "demande_confirmation";
         }
