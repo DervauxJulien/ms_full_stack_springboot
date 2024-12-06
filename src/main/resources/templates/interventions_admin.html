@@ -12,6 +12,9 @@
                 <td>description</td>
                 <td>Id User</td>
                 <td>date de creation</td>
+                <td>date d'affectation'</td>
+                <td>date de réalisation'</td>
+
                 <td>priorité</td>
                 <td>Prise en charge</td>
                 <td>Réalisé</td>
@@ -21,6 +24,9 @@
                 <td th:text="${intervention.description}"></td>
                 <td th:text="${intervention.idUser.firstname}"></td>
                 <td th:text="${intervention.creationDate}"></td>
+                <td th:text="${intervention.affectationDate}"></td>
+                <td th:text="${intervention.realisationDate}"></td>
+
                 <td th:text="${intervention.priority}"></td>
                 <td >
                     <select name="intervenant" >

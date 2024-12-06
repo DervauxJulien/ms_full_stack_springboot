@@ -72,7 +72,6 @@ public class InterventionController {
 
     public String getInterventionUser(@PathVariable("iduser") String id_user, @PathVariable("idintervention") String id_intervention, Model model){
         // return juste les demandes  interventions faite  par l'utilisateur
-        System.out.println("-----------"+ id_user);
 
         Intervention intervention = interventionService.getIntervention (Integer.parseInt(id_intervention));
 
