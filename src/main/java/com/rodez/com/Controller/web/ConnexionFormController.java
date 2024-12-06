@@ -50,7 +50,7 @@ public class ConnexionFormController {
                 }
             }
             if(authorizedToConnect){
-                session.setAttribute("idUser", user.getIdUser());
+                session.setAttribute("idUser", user.getRegistration());
                 Intervention intervention = new Intervention();
                 Iterable<Location> locations = locationService.getLocation();
                 model.addAttribute("intervention", intervention);

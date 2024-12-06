@@ -3,6 +3,7 @@ package com.rodez.com.Controller.web;
 import com.rodez.com.Entity.Intervention;
 import com.rodez.com.Entity.Location;
 import com.rodez.com.Entity.User;
+import com.rodez.com.Service.InterventionService;
 import com.rodez.com.Service.LocationService;
 import com.rodez.com.Service.UserService;
 import jakarta.validation.Valid;
@@ -13,14 +14,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
-import java.awt.*;
-import java.util.Optional;
+
+import java.sql.Timestamp;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 public class SubmitDemandeController {
     @Autowired
     HttpSession session;
-
+    @Autowired
+    private InterventionService interventionService ;
     @Autowired
     private LocationService locationService;
     @Autowired
@@ -35,10 +41,25 @@ public class SubmitDemandeController {
             model.addAttribute("locationList", locations);
             return "demande_intervention";
         } else {
-            Integer id = (Integer) session.getAttribute("idUser");
-            Optional<User> user = userService.getUserById(id);
-            intervention.setIdUser(user.get());
-            model.addAttribute("intervention", intervention);
+            String id = (String) session.getAttribute("idUser");
+            User user = userService.getByRegistration(id);
+            intervention.setIdUser(user);
+            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            intervention.setCreationDate(timestamp);
+
+
+            //Ajout de l'intervention dans la base de données.
+            Intervention newIntervention = interventionService.createIntervention(intervention);
+            Integer identifiant = newIntervention.getIdIntervention();
+            String identifiantString = identifiant.toString(identifiant);
+
+            while(identifiantString.length()<4 ){
+                identifiantString= "0"+identifiantString;
+
+            }
+            model.addAttribute("intervention", newIntervention);
+            model.addAttribute("identifiant_intervention" , identifiantString);
+
             return "demande_confirmation";
         }
     }

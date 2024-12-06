@@ -23,12 +23,14 @@ import java.util.Optional;
 
 @Repository
 public interface InterventionRepositoryInterface extends JpaRepository<Intervention, Integer> {
-    @Query(value = "SELECT * FROM \"INTERVENTION\" i WHERE id_user = ?1 ",nativeQuery = true)
+    @Query(value = "SELECT * FROM \"INTERVENTION\" WHERE \"idUser\" = ?1 ",nativeQuery = true)
     List<Intervention> getMyRequest(@Param(("id_user")) Integer id_user);
-    @Query(value = "SELECT * FROM \"INTERVENTION\" i WHERE id_intervention = ?1 ",nativeQuery = true)
+    @Query(value = "SELECT * FROM \"INTERVENTION\" WHERE ? = \"idIntervention\" ",nativeQuery = true)
     Intervention getIntervention (@Param("id_intervention") Integer id_intervention);
 
 
+//    @Query(value="SELECT * FROM \"USER\" WHERE ? = registration ", nativeQuery = true)
+//    User getByRegistration(String registration);
 
 
 

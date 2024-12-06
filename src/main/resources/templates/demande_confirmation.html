@@ -8,8 +8,12 @@
         <h2> Votre demande est bien enregistée </h2>
         <!-- récupérartion du numero de la demande de suivi-->
 
-        <h2> N° de la demande : xxxxxxxx </h2>
+        <h2> N° de la demande : <span th:text="${identifiant_intervention}"></span> </h2>
 <!--        <p th:text="${intervention.idUser.firstname} + ' ' + ${intervention.idUser.lastname}"></p>-->
+        <form th:action="@{/intervention_suivi}"  method="get" th:object="${intervention}">
+            <input type="text" hidden th:value="${intervention.idIntervention}" th:field="*{idIntervention}">
+            <button type="submit" value="">Suivre la demande</button>
+        </form>
 
 
     </body>

@@ -12,10 +12,12 @@ import java.util.List;
 @Repository
 public interface UserRepositoryInterface extends JpaRepository<User, Integer> {
 
-    @Query(value="SELECT * FROM \"USER\"  WHERE role_user <> 'personnel' ",nativeQuery = true)
+    @Query(value="SELECT * FROM \"USER\"  WHERE \"roleUser\" <> 'personnel' ",nativeQuery = true)
     List<User> getAllIntervenant();
 
     List<User> findAll(Sort sort);
+    @Query(value="SELECT * FROM \"USER\" WHERE ? = registration ", nativeQuery = true)
+    User getByRegistration(String registration);
 
 
 }

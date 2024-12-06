@@ -8,6 +8,7 @@
         <h2>Mes demandes d'interventions : </h2>
         <table border="1px">
             <tr>
+                <td>Numéro de la demande</td>
                 <td>date</td>
                 <td>date de creation</td>
                 <td>date de réalisation</td>
@@ -19,6 +20,8 @@
                 <td>Id location</td>
             </tr>
             <tr th:each="request : ${myRequest}">
+
+                <td ><a th:text="${request.idIntervention}" th:href="@{/interventions_user/{idUser}/{idIntervention}(idUser=${request.idUser.idUser}, idIntervention=${request.idIntervention})} "></a></td>
                 <td th:text="${#dates.formatISO(request.date)}"></td>
                 <td th:text="${#dates.formatISO(request.creationDate)}"></td>
                 <td th:text="${#dates.formatISO(request.realisationDate)}"></td>

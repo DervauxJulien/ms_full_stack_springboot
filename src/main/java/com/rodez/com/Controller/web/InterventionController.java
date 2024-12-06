@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -63,7 +65,30 @@ public class InterventionController {
 
         model.addAttribute("myRequest", requests);
         return "interventions_user";
+    }
 
 
+    @GetMapping("/interventions_user/{iduser}/{idintervention}")
+
+    public String getInterventionUser(@PathVariable("iduser") String id_user, @PathVariable("idintervention") String id_intervention, Model model){
+        // return juste les demandes  interventions faite  par l'utilisateur
+        System.out.println("-----------"+ id_user);
+
+        Intervention intervention = interventionService.getIntervention (Integer.parseInt(id_intervention));
+
+
+        model.addAttribute("intervention", intervention);
+        return "intervention_details";
+    }
+    @GetMapping("intervention_suivi")
+    public String getSuiviIntervention (@ModelAttribute("intervention_a_suivre") Intervention intervention , Model model){
+//        System.out.println("--------------------------"+intervention.getIdUser());
+//        model.addAttribute("intervention", intervention);
+//        System.out.println("identifiant = " + identifiant);
+//        Intervention intervention = interventionService.getIntervention(Integer.parseInt(identifiant));
+        Intervention inter = interventionService.getById(intervention.getIdIntervention()).get();
+        model.addAttribute("intervention", inter);
+
+        return "intervention_details";
     }
 }

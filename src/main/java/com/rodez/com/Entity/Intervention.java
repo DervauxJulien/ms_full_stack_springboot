@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class Intervention {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idIntervention")
     private int idIntervention;
     // date de validation de la demande  non pas de l'intervention
     private Timestamp date;

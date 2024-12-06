@@ -22,6 +22,7 @@ public class UserService {
        return  userRepository.findById(id);
 
     }
+
     public List<User> getAllIntervenant(){
         return userRepository.getAllIntervenant();
 
@@ -34,6 +35,10 @@ public class UserService {
     }
     public User updateUser(User user){
         return userRepository.save(user);
+    }
+
+    public User getByRegistration(String registration){
+        return  userRepository.getByRegistration(registration);
     }
 
 
