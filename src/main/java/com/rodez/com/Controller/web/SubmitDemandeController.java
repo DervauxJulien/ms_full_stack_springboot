@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,6 +46,7 @@ public class SubmitDemandeController {
             User user = userService.getByRegistration(id);
             intervention.setIdUser(user);
             Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); si besoinde faire le formatage des dates
             intervention.setCreationDate(timestamp);
 
 

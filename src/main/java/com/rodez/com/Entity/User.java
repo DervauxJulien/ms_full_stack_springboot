@@ -2,15 +2,13 @@ package com.rodez.com.Entity;
 
 import com.rodez.com.Validator.ImmatriculationValidatorInterface;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 
 
 @Entity
 @Table(name="\"USER\"")
 
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUser")
@@ -27,6 +25,7 @@ public class User {
 
     @Column(name="roleUser")
     private String roleUser;
+    @ImmatriculationValidatorInterface(regex = "[a-zA-Z0-9/*@-_?!]+", message = "Wrong password")
     @Column(name="passwordUser")
     private String passwordUser;
 

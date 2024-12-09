@@ -16,7 +16,7 @@ public class LocationRestController {
     private LocationService locationService = new LocationService();
 
     @GetMapping("locations_admin_rest")
-    public Iterable <Location> getAllUsers(){
+    public Iterable <Location> getAllLocations(){
         return locationService.getLocation();
 
     }

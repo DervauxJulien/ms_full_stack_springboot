@@ -8,24 +8,26 @@
         <h2>Liste des interventions : </h2>
         <table border="1px">
             <tr>
-                <td>date</td>
+                <td>ID</td>
+                <td>description</td>
                 <td>date de creation</td>
-                <td>date de réalisation</td>
+                <td>date</td>
                 <td>date d'affectation</td>
+                <td>date de réalisation</td>
                 <td>priorité</td>
                 <td>Status</td>
-                <td>description</td>
                 <td>Id User</td>
                 <td>Id location</td>
             </tr>
             <tr th:each="intervention : ${interventionsList}">
-                <td th:text="${intervention.date}"></td>
+                <td ><a th:text="${intervention.idIntervention}" th:href="@{/interventions_admin/{id}(id=${intervention.idIntervention})}"></a></td>
+                <td th:text="${intervention.description}"></td>
                 <td th:text="${intervention.creationDate}"></td>
-                <td th:text="${intervention.realisationDate}"></td>
+                <td th:text="${intervention.date}"></td>
                 <td th:text="${intervention.affectationDate}"></td>
+                <td th:text="${intervention.realisationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
                 <td th:text="${intervention.status}"></td>
-                <td th:text="${intervention.description}"></td>
                 <td th:text="${intervention.idUser.idUser}"></td>
                 <td th:text="${intervention.idLocation.idLocation}"></td>
             </tr>

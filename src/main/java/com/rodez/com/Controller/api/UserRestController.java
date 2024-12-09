@@ -34,6 +34,11 @@ public class UserRestController {
         userService.deleteById(id);
     }
 
+    @PutMapping("/update_user_rest")
+    public User updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
 
 
 

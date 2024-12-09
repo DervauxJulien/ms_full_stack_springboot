@@ -40,6 +40,7 @@ public class UserController {
         model.addAttribute("usersList",users);
         return "users";
     }
+
     /*
         function to fin user by id
      */
