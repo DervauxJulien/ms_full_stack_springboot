@@ -10,26 +10,29 @@
             <tr>
                 <td>ID</td>
                 <td>description</td>
+                <td>User</td>
                 <td>date de creation</td>
                 <td>date</td>
                 <td>date d'affectation</td>
                 <td>date de réalisation</td>
                 <td>priorité</td>
+                <td>Prise en charge</td>
                 <td>Status</td>
-                <td>Id User</td>
                 <td>Id location</td>
             </tr>
             <tr th:each="intervention : ${interventionsList}">
                 <td ><a th:text="${intervention.idIntervention}" th:href="@{/interventions_admin/{id}(id=${intervention.idIntervention})}"></a></td>
                 <td th:text="${intervention.description}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
                 <td th:text="${intervention.creationDate}"></td>
                 <td th:text="${intervention.date}"></td>
                 <td th:text="${intervention.affectationDate}"></td>
                 <td th:text="${intervention.realisationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
+                <td th:if="${intervention.idIntervenant != null}" th:text="${intervention.idIntervenant.firstname} + ' ' + ${intervention.idIntervenant.lastname}"></td>
+                <td th:unless="${intervention.idIntervenant != null}"></td>
                 <td th:text="${intervention.status}"></td>
-                <td th:text="${intervention.idUser.idUser}"></td>
-                <td th:text="${intervention.idLocation.idLocation}"></td>
+                <td th:text="${intervention.idLocation.nameLocation}"></td>
             </tr>
 
         </table>

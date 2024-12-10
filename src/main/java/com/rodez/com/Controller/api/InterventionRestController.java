@@ -6,8 +6,6 @@ import com.rodez.com.Entity.User;
 import com.rodez.com.Service.InterventionService;
 import com.rodez.com.Service.LocationService;
 import com.rodez.com.Service.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +56,20 @@ public class InterventionRestController {
         return interventionService.createIntervention(intervention);
     }
 
-
-
+    @PostMapping("/login")
+    public Iterable<Intervention> login(@RequestBody User user){
+        Integer idUser = connect(user);
+        Iterable<Intervention> listInterventions = null;
+        if(idUser!= 0){
+            if(user.getPasswordUser() == userService.getUserById(idUser).get().getPasswordUser()){
+                if(user.getRegistration().charAt(0) == 'A' || user.getRegistration().charAt(0) == 'F'){
+                    listInterventions = interventionService.getAll();
+                }
+                else{
+                    listInterventions = interventionService.getMyRequest(idUser);
+                }
+            }
+        }
+        return listInterventions;
+    }
 }
