@@ -28,16 +28,18 @@
                 <td th:text="${intervention.realisationDate}"></td>
 
                 <td th:text="${intervention.priority}"></td>
-                <td >
+                <td>
+                   <form th:object="${intervention_to_edit}">
                     <select name="intervenant" >
                         <option th:if="${intervention.idIntervenant == null}" value="" selected >Choisir un intervenant</option>
 
                         <option th:each="intervenant : ${intervenants}"
-                                th:value="${intervenant.idUser}"
-                                th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
-                                th:selected="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == intervenant.idUser}">
+                            th:value="${intervenant.idUser}"
+                            th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
+                            th:selected="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == intervenant.idUser}">
                         </option>
                     </select>
+                   </form>
                 </td>
                 <td th:text="${intervention.status}"></td>
             </tr>
