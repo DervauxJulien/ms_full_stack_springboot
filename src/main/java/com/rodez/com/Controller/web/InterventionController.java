@@ -4,14 +4,12 @@ import com.rodez.com.Entity.Intervention;
 import com.rodez.com.Entity.User;
 import com.rodez.com.Service.InterventionService;
 import com.rodez.com.Service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,14 +21,19 @@ public class InterventionController {
     InterventionService interventionService = new InterventionService();
     @Autowired
     UserService userService = new UserService();
+
     //admin view
     @GetMapping("/interventions_admin")
-    public String getInterventionsAdmin(Model model){
+    public String getInterventionsAdmin(@ModelAttribute ("intervention") Intervention intervention, Model model){
         Iterable<Intervention> interventions = interventionService.getAll();
         model.addAttribute("interventionsList", interventions);
 
         List<User> intervenants = userService.getAllIntervenant();
         model.addAttribute("intervenants", intervenants);
+
+        System.out.println("------------------------"+intervention.getIdIntervention());
+
+        model.addAttribute("intervention", intervention);//new Intervention()); // or pass an existing Intervention object if needed
 
 
         return "interventions_admin";
@@ -89,5 +92,19 @@ public class InterventionController {
         model.addAttribute("intervention", inter);
 
         return "intervention_details";
+    }
+
+    @PostMapping("update_intervenant")
+    public String updateIntervenant(@ModelAttribute ("intervention") Intervention intervention, @RequestParam ("intervenant") User user, Model model){
+        System.out.println("------------------------"+intervention.getIdIntervention());
+        System.out.println("------------------------"+intervention.getDescription());
+        System.out.println("------------------------"+user.getFirstname());
+        intervention.setIdIntervenant(user);
+        Iterable<Intervention> interventions = interventionService.getAll();
+        model.addAttribute("interventionsList", interventions);
+
+        List<User> intervenants = userService.getAllIntervenant();
+        model.addAttribute("intervenants", intervenants);
+        return "interventions_admin";
     }
 }

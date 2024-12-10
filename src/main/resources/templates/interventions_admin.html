@@ -29,8 +29,11 @@
 
                 <td th:text="${intervention.priority}"></td>
                 <td>
-                   <form th:object="${intervention_to_edit}">
-                    <select name="intervenant" >
+                    <form th:action="@{/update_intervenant}" method="POST" th:object="${intervention}">
+                        <input th:value="${intervention.idIntervention}">
+                        <input id="idIntervention" th:value="${intervention.idIntervention}" th:field="*{idIntervention}">
+<!--                       <input th:field="*{idIntervention}" th:value="${intervention.idIntervention}" type="hidden">-->
+                       <select name="intervenant" onchange="this.form.submit()">
                         <option th:if="${intervention.idIntervenant == null}" value="" selected >Choisir un intervenant</option>
 
                         <option th:each="intervenant : ${intervenants}"

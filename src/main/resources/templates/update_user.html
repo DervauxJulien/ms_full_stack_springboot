@@ -17,7 +17,7 @@
                     <td><label for="password">password.user</label></td>
                 </tr>
                 <tr>
-                    <input id="id_user" th:value="${user_to_edit.idUser}" th:field="*{idUser}" hidden/>
+                    <input th:value="${user_to_edit.idUser}" th:field="*{idUser}" hidden/>
                     <td th:text="${user_to_edit.idUser}"></td>
                     <td><input id="registration" th:value="${user_to_edit.registration}" th:field="*{registration}"/></td>
                     <td><input id="lastname" th:value="${user_to_edit.lastname}" th:field="*{lastname}"/></td>
