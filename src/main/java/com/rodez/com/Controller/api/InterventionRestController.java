@@ -62,7 +62,7 @@ public class InterventionRestController {
         return interventionService.createIntervention(intervention);
     }
 
-    @GetMapping("/intervention_details")
+    @PostMapping("/intervention_details")
     public Intervention detailsIntervention(@RequestBody Integer idIntervention){
         return interventionService.getIntervention(idIntervention);
     }
