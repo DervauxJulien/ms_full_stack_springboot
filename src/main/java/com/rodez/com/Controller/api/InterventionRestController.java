@@ -62,6 +62,10 @@ public class InterventionRestController {
         return interventionService.createIntervention(intervention);
     }
 
+    @GetMapping("/intervention_details")
+    public Intervention detailsIntervention(@RequestBody Integer idIntervention){
+        return interventionService.getIntervention(idIntervention);
+    }
     @PostMapping("/login")
     public Iterable<Intervention> login(@RequestBody User user){
         Integer idUser = 0;
