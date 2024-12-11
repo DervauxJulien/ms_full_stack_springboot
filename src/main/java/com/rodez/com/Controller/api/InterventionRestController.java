@@ -35,6 +35,12 @@ public class InterventionRestController {
         return interventionService.getById(id);
     }
 
+    @PostMapping("/interventions_user")
+    public Iterable<Intervention> interventionsList(@RequestBody Map<String, Object> requestBody){
+        User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
+        return interventionService.getMyRequest(user.getIdUser());
+    }
+
     @PostMapping("/checkUser")
     public Integer connect(@RequestBody User user){
         Integer check = 0;
