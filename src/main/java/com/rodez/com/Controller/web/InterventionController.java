@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,16 +26,13 @@ public class InterventionController {
 
     //admin view
     @GetMapping("/interventions_admin")
-    public String getInterventionsAdmin(@ModelAttribute ("intervention_to_update") Intervention intervention, Model model){
+    public String getInterventionsAdmin(Model model){
         Iterable<Intervention> interventions = interventionService.getAll();
         model.addAttribute("interventionsList", interventions);
 
         List<User> intervenants = userService.getAllIntervenant();
         intervenants.add(null);
         model.addAttribute("intervenants", intervenants);
-
-        model.addAttribute("intervention_to_update", intervention);//new Intervention()); // or pass an existing Intervention object if needed
-
 
         return "interventions_admin";
     }
@@ -93,12 +92,19 @@ public class InterventionController {
         return "intervention_details";
     }
 
-    @PostMapping("update_intervenant")
-    public String updateIntervenant(/*@ModelAttribute ("intervention_to_update") Intervention intervention*/@RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "intervenant", required = false) User user, Model model){
+    @PostMapping("update_intervenant_formateur")
+    public String updateIntervenant(@RequestParam ("idIntervention") Integer idIntervention){
+    return null;
+    }
+    @PostMapping("update_intervenant_admin")
+    public String updateIntervenant(@RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "intervenant", required = false) User user, Model model){
         Intervention intervention = interventionService.getIntervention(idIntervention);
         if(intervention != null){
-                intervention.setIdIntervenant(user);
-                interventionService.updateIntervention(intervention);
+            Timestamp timestamp = null;
+            if(user!= null) timestamp = Timestamp.valueOf(LocalDateTime.now());
+            intervention.setAffectationDate(timestamp);
+            intervention.setIdIntervenant(user);
+            interventionService.updateIntervention(intervention);
         }
         Iterable<Intervention> interventions = interventionService.getAll();
         model.addAttribute("interventionsList", interventions);

@@ -12,7 +12,7 @@
                 <td>description</td>
                 <td>User</td>
                 <td>date de creation</td>
-                <td>date</td>
+                <td>date de validation</td>
                 <td>date d'affectation</td>
                 <td>date de réalisation</td>
                 <td>priorité</td>
@@ -29,8 +29,13 @@
                 <td th:text="${intervention.affectationDate}"></td>
                 <td th:text="${intervention.realisationDate}"></td>
                 <td th:text="${intervention.priority}"></td>
-                <td th:if="${intervention.idIntervenant != null}" th:text="${intervention.idIntervenant.firstname} + ' ' + ${intervention.idIntervenant.lastname}"></td>
-                <td th:unless="${intervention.idIntervenant != null}"></td>
+                <form th:action="@{/update_intervenant_formateur}" method="POST">
+                    <input id="idIntervention" th:value="${intervention.idIntervention}" name="idIntervention" hidden>
+
+                    <td th:if="${intervention.idIntervenant != null}" th:text="${intervention.idIntervenant.firstname} + ' ' + ${intervention.idIntervenant.lastname}"></td>
+                    <td th:unless="${intervention.idIntervenant != null}"></td>
+                    <input type="checkbox" onchange="this.form.submit()">
+                </form>
                 <td th:text="${intervention.status}"></td>
                 <td th:text="${intervention.idLocation.nameLocation}"></td>
             </tr>

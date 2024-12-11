@@ -12,8 +12,8 @@
                 <td>description</td>
                 <td>User</td>
                 <td>date de creation</td>
-                <td>date d'affectation'</td>
-                <td>date de réalisation'</td>
+                <td>date d'affectation</td>
+                <td>date de réalisation</td>
 
                 <td>priorité</td>
                 <td>Prise en charge</td>
@@ -29,11 +29,9 @@
 
                 <td th:text="${intervention.priority}"></td>
                 <td>
-                    <form th:action="@{/update_intervenant}" method="POST">
+                    <form th:action="@{/update_intervenant_admin}" method="POST">
                         <input id="idIntervention" th:value="${intervention.idIntervention}" name="idIntervention" hidden>
-<!--                       <input th:field="*{idIntervention}" th:value="${intervention.idIntervention}" type="hidden">-->
                        <select name="intervenant" onchange="this.form.submit()">
-<!--                        <option th:if="${intervention.idIntervenant == null}" value="" selected >Choisir un intervenant</option>-->
                         <option th:if="${intervenant == null}" value="">Choisir un intervenant</option>
 
                         <option th:each="intervenant : ${intervenants}"
@@ -42,7 +40,6 @@
                                 th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
                                 th:selected="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == intervenant.idUser}">
                         </option>
-<!--                        <option th:unless="${intervenant != null}" value="">Choisir un intervenant</option>-->
                     </select>
                    </form>
                 </td>
