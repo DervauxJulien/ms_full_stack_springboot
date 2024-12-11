@@ -117,6 +117,21 @@ public class InterventionController {
         return "intervention_details";
     }
 
+    @PostMapping("update_priority_admin")
+    public String updatePriority(@RequestParam ("idIntervention") Integer idIntervention, @RequestParam ("check") String priority, Model model){
+        Intervention intervention = interventionService.getIntervention(idIntervention);
+        intervention.setPriority(priority);
+        interventionService.updateIntervention(intervention);
+
+        Iterable<Intervention> interventions = interventionService.getAll();
+        model.addAttribute("interventionsList", interventions);
+
+        List<User> intervenants = userService.getAllIntervenant();
+        intervenants.add(null);
+        model.addAttribute("intervenants", intervenants);
+        return "interventions_admin" ;
+    }
+
     @PostMapping("update_intervenant_admin")
     public String updateIntervenant(@RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "intervenant", required = false) User user, Model model){
         Intervention intervention = interventionService.getIntervention(idIntervention);

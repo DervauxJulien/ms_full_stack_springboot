@@ -33,6 +33,7 @@
                     <input id="idIntervention" th:value="${intervention.idIntervention}" name="idIntervention" hidden>
                     <td th:if="${intervention.idIntervenant == null}">
                         <input type="checkbox" onchange="this.form.submit()" name="check">
+                        <span>Me positionner</span>
                     </td>
 
                     <td th:if="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == idUser}">

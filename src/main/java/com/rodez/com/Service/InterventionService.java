@@ -4,6 +4,7 @@ import com.rodez.com.Entity.Intervention;
 import com.rodez.com.Entity.User;
 import com.rodez.com.Repository.interventions.InterventionRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class InterventionService {
 
     }
     public Iterable<Intervention> getAll(){
-        return interventionRepository.findAll();
+        return interventionRepository.findAll(Sort.by(Sort.Direction.ASC, "idIntervention"));
 
     }
 
