@@ -73,7 +73,7 @@ public class InterventionRestController {
         return interventionService.getIntervention(idIntervention);
     }
     @PostMapping("/login")
-    public Iterable<Intervention> login(@RequestBody User user){
+    public List<Object> login(@RequestBody User user){
         Integer idUser = 0;
         Iterable<User> users = userService.listAll();
         List<User> userList = new ArrayList<User>();
@@ -85,14 +85,20 @@ public class InterventionRestController {
         }
 
         Iterable<Intervention> listInterventions = null;
+        List<Object> list = null;
         if(idUser!= 0){
+            list = new ArrayList<>();
             if(user.getRegistration().charAt(0) == 'A' || user.getRegistration().charAt(0) == 'F'){
                 listInterventions = interventionService.getAll();
+                list.add(listInterventions);
+                list.add(idUser);
             }
             else{
                 listInterventions = interventionService.getMyRequest(idUser);
+                list.add(listInterventions);
+                list.add(idUser);
             }
         }
-        return listInterventions;
+        return list;
     }
 }
