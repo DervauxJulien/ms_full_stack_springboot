@@ -91,7 +91,7 @@ public class InterventionRestController {
     }
     @PostMapping("/login")
     public Integer login(@RequestBody User user){
-        Integer idUser = 0;
+        int  idUser = 0;
         Iterable<User> users = userService.listAll();
         List<User> userList = new ArrayList<User>();
         users.forEach(userList::add);
