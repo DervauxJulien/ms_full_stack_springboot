@@ -24,16 +24,15 @@ public class InterventionController {
 
     //admin view
     @GetMapping("/interventions_admin")
-    public String getInterventionsAdmin(@ModelAttribute ("intervention") Intervention intervention, Model model){
+    public String getInterventionsAdmin(@ModelAttribute ("intervention_to_update") Intervention intervention, Model model){
         Iterable<Intervention> interventions = interventionService.getAll();
         model.addAttribute("interventionsList", interventions);
 
         List<User> intervenants = userService.getAllIntervenant();
+        intervenants.add(null);
         model.addAttribute("intervenants", intervenants);
 
-        System.out.println("------------------------"+intervention.getIdIntervention());
-
-        model.addAttribute("intervention", intervention);//new Intervention()); // or pass an existing Intervention object if needed
+        model.addAttribute("intervention_to_update", intervention);//new Intervention()); // or pass an existing Intervention object if needed
 
 
         return "interventions_admin";
@@ -95,15 +94,17 @@ public class InterventionController {
     }
 
     @PostMapping("update_intervenant")
-    public String updateIntervenant(@ModelAttribute ("intervention") Intervention intervention, @RequestParam ("intervenant") User user, Model model){
-        System.out.println("------------------------"+intervention.getIdIntervention());
-        System.out.println("------------------------"+intervention.getDescription());
-        System.out.println("------------------------"+user.getFirstname());
-        intervention.setIdIntervenant(user);
+    public String updateIntervenant(/*@ModelAttribute ("intervention_to_update") Intervention intervention*/@RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "intervenant", required = false) User user, Model model){
+        Intervention intervention = interventionService.getIntervention(idIntervention);
+        if(intervention != null){
+                intervention.setIdIntervenant(user);
+                interventionService.updateIntervention(intervention);
+        }
         Iterable<Intervention> interventions = interventionService.getAll();
         model.addAttribute("interventionsList", interventions);
 
         List<User> intervenants = userService.getAllIntervenant();
+        intervenants.add(null);
         model.addAttribute("intervenants", intervenants);
         return "interventions_admin";
     }

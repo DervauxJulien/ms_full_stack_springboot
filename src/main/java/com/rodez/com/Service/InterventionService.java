@@ -34,4 +34,8 @@ public class InterventionService {
     public Intervention createIntervention(Intervention intervention) {
         return interventionRepository.save(intervention);
     }
+
+    public Intervention updateIntervention(Intervention intervention){
+        return interventionRepository.save(intervention);
+    }
 }
