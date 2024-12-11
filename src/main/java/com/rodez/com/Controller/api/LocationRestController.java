@@ -16,7 +16,7 @@ public class LocationRestController {
     @Autowired
     private LocationService locationService = new LocationService();
 
-    @PostMapping("locations_admin_rest")
+    @PostMapping("locations")
     public Iterable <Location> getAllLocations(){
         return locationService.getLocation();
 
