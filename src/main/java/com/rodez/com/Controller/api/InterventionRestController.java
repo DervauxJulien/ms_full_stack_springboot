@@ -100,22 +100,6 @@ public class InterventionRestController {
                 idUser = userList.get(i).getIdUser();
             }
         }
-
-//        Iterable<Intervention> listInterventions = null;
-//        List<Object> list = null;
-//        if(idUser!= 0){
-//            list = new ArrayList<>();
-//            if(user.getRegistration().charAt(0) == 'A' || user.getRegistration().charAt(0) == 'F'){
-//                listInterventions = interventionService.getAll();
-//                list.add(listInterventions);
-//                list.add(idUser);
-//            }
-//            else{
-//                listInterventions = interventionService.getMyRequest(idUser);
-//                list.add(listInterventions);
-//                list.add(idUser);
-//            }
-//        }
         return idUser;
     }
 }

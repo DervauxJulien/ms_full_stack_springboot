@@ -49,9 +49,34 @@ public class InterventionController {
     }
 
     //formateur view
-    @GetMapping("/interventions_formateur")
-    public String getInterventionsFormateur(Model model){
+    @GetMapping("/interventions_formateur/{id}")
+    public String getInterventionsFormateur(@PathVariable("id") Integer idFormateur, Model model){
+        model.addAttribute("idUser", idFormateur);
         Iterable<Intervention> interventions = interventionService.getAll();
+        model.addAttribute("interventionsList", interventions);
+        return "interventions_formateur";
+    }
+
+    @PostMapping("update_intervenant_formateur/{id}")
+    public String updateIntervenant(@PathVariable ("id") Integer idUser, @RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "check", required = false) String check, Model model){
+        Intervention intervention = interventionService.getIntervention(idIntervention);
+        User user = userService.getUserById(idUser).get();
+        Timestamp timestamp = null;
+        if("on".equals(check)){
+            if(intervention != null){
+                timestamp = Timestamp.valueOf(LocalDateTime.now());
+                intervention.setAffectationDate(timestamp);
+                intervention.setIdIntervenant(user);
+                interventionService.updateIntervention(intervention);
+            }
+        }
+        else {
+            intervention.setAffectationDate(timestamp);
+            intervention.setIdIntervenant(null);
+            interventionService.updateIntervention(intervention);
+        }
+        Iterable<Intervention> interventions = interventionService.getAll();
+        model.addAttribute("idUser", idUser);
         model.addAttribute("interventionsList", interventions);
         return "interventions_formateur";
     }
@@ -92,10 +117,6 @@ public class InterventionController {
         return "intervention_details";
     }
 
-    @PostMapping("update_intervenant_formateur")
-    public String updateIntervenant(@RequestParam ("idIntervention") Integer idIntervention){
-    return null;
-    }
     @PostMapping("update_intervenant_admin")
     public String updateIntervenant(@RequestParam ("idIntervention") Integer idIntervention, @RequestParam (value = "intervenant", required = false) User user, Model model){
         Intervention intervention = interventionService.getIntervention(idIntervention);
