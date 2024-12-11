@@ -6,6 +6,7 @@ import com.rodez.com.Entity.User;
 import com.rodez.com.Service.InterventionService;
 import com.rodez.com.Service.LocationService;
 import com.rodez.com.Service.UserService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,45 @@ public class InterventionRestController {
         return interventionService.getById(id);
     }
 
+    @PostMapping("/intervention_update_priority")
+    public String updatePriority(@RequestBody Map<String, Object> requestBody){
+        Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
+        intervention.setPriority((String) requestBody.get("priority"));
+        interventionService.updateIntervention(intervention);
+        return "Priorité modifiée";
+    }
+
+    @PostMapping("/intervention_update_intervenant")
+    public String updateIntervenant(@RequestBody Map<String, Object> requestBody){
+        Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
+        Optional<User> opt = null;
+        User user = null;
+
+        Timestamp timestamp = null;
+        String s = "Intervenant null";
+
+        if(requestBody.get("idIntervenant") != null) {
+            opt = userService.getUserById((Integer) requestBody.get("idIntervenant"));
+//        System.out.println("--------------------"+opt.isPresent());
+            if(opt.isPresent()){
+                user = opt.get();
+            }
+            if(user != null && (user.getRoleUser().equals("admin") || user.getRoleUser().equals("formateur"))){
+                intervention.setIdIntervenant(user);
+                timestamp = Timestamp.valueOf(LocalDateTime.now());
+                s= "Intervenant modifié";
+            }
+            else{
+                s = "Intervenant pas dans la base";
+            }
+        }
+
+
+
+        intervention.setAffectationDate(timestamp);
+        interventionService.updateIntervention(intervention);
+        return s;
+    }
     @PostMapping("/interventions_user")
     public List<Object> interventionsList(@RequestBody Map<String, Object> requestBody){
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
