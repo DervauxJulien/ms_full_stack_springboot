@@ -44,7 +44,7 @@ public class InterventionRestController {
         return "Priorité modifiée";
     }
 
-    @PostMapping("/intervention_update_status")
+    @PutMapping("/intervention_update_status")
     public String updateStatus(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
         String status = (String) requestBody.get("status");
