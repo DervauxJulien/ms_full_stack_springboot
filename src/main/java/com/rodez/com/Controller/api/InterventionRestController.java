@@ -133,7 +133,7 @@ public class InterventionRestController {
     public Intervention createIntervention(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = new Intervention();
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
-        Location location = locationService.getLocationById((Integer) requestBody.get("idLocation")).get();
+        Location location = locationService.getLocationByName((String) requestBody.get("nameLocation"));
         String priority = (String) requestBody.get("priority");
         if(priority != null){
             intervention.setPriority(priority);

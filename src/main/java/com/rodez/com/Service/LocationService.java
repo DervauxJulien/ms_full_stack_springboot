@@ -15,6 +15,9 @@ public class LocationService {
     public Iterable<Location> getLocation(){
         return  locationRepositoryInterface.findAll();
     }
+    public Location getLocationByName(String name){
+        return locationRepositoryInterface.getLocationByName(name);
+    }
     public Optional<Location> getLocationById(Integer id){
         return  locationRepositoryInterface.findById(id);
 
