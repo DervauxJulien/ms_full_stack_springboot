@@ -44,6 +44,21 @@ public class InterventionRestController {
         return "Priorité modifiée";
     }
 
+    @PostMapping("/intervention_update_status")
+    public String updateStatus(@RequestBody Map<String, Object> requestBody){
+        Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
+        String status = (String) requestBody.get("status");
+        System.out.println(status);
+        if(status.equals("en cours") || status.equals("réalisé") || status.equals("en attente") || status.equals("traité")){
+            intervention.setStatus(status);
+            interventionService.updateIntervention(intervention);
+        }
+        else{
+            status = "Mauvais status";
+        }
+
+        return status;
+    }
     @PostMapping("/intervention_update_intervenant")
     public String updateIntervenant(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
