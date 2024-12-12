@@ -54,13 +54,29 @@ public class UserRestController {
 
         return user;
     }
-    @DeleteMapping("/delete_user_rest/{id}")
-    public void delete_User(@PathVariable("id") Integer id){
-        userService.deleteById(id);
+    @DeleteMapping("/delete_user_rest")
+    public void delete_User(@RequestBody Map<String, Object> requestBody){
+        userService.deleteById((Integer) requestBody.get("idUser"));
     }
 
     @PutMapping("/update_user_rest")
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@RequestBody Map<String, Object> requestBody){
+        User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
+        if(requestBody.get("registration")!=null){
+            user.setRegistration((String) requestBody.get("registration"));
+        }
+        if(requestBody.get("roleUser")!=null){
+            user.setRoleUser((String) requestBody.get("roleUser"));
+        }
+        if(requestBody.get("lastname")!=null){
+            user.setLastname((String) requestBody.get("lastname"));
+        }
+        if(requestBody.get("firstname")!=null){
+            user.setFirstname((String) requestBody.get("firstname"));
+        }
+        if(requestBody.get("passwordUser")!=null){
+            user.setPasswordUser((String) requestBody.get("passwordUser"));
+        }
         return userService.updateUser(user);
     }
 
