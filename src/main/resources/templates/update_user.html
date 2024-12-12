@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>User</title>
+    </head>
+    <body>
+        <h2>Mise à jour  de l'utilisateur :
+            <form th:action="@{/update_user/{id}(id=${user_to_edit.idUser})}" method="'POST" th:object="${user_to_edit}">
+            <table border="1px">
+                <tr>
+                    <td><label >id_user</label></td>
+                    <td><label for="registration">registration</label></td>
+                    <td><label for="lastname">lastname</label></td>
+                    <td><label for="firstname">firstname</label></td>
+                    <td><label for="role">role_user</label></td>
+                    <td><label for="password">password.user</label></td>
+                </tr>
+                <tr>
+                    <input th:value="${user_to_edit.idUser}" th:field="*{idUser}" hidden/>
+                    <td th:text="${user_to_edit.idUser}"></td>
+                    <td><input id="registration" th:value="${user_to_edit.registration}" th:field="*{registration}"/></td>
+                    <td><input id="lastname" th:value="${user_to_edit.lastname}" th:field="*{lastname}"/></td>
+                    <td><input id="firstname" th:value="${user_to_edit.firstname}" th:field="*{firstname}"/></td>
+                    <td><input id="role" th:value="${user_to_edit.roleUser}" th:field="*{roleUser}"/></td>
+                    <td><input id="password" th:value="${user_to_edit.passwordUser}" th:field="*{passwordUser}"/></td>
+
+                </tr>
+
+            </table>
+
+                 <button type="submit" >Valider</button>
+            </form>
+
+
+    </body>
+</html>

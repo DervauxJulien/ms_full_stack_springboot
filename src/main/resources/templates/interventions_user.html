@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Mes demandes d'interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>Numéro de la demande</td>
+                <td>date</td>
+                <td>date de creation</td>
+                <td>date de réalisation</td>
+
+                <td>priorité</td>
+                <td>Status</td>
+                <td>description</td>
+                <td>Id User</td>
+                <td>Id location</td>
+            </tr>
+            <tr th:each="request : ${myRequest}">
+
+                <td ><a th:text="${request.idIntervention}" th:href="@{/interventions_user/{idUser}/{idIntervention}(idUser=${request.idUser.idUser}, idIntervention=${request.idIntervention})} "></a></td>
+                <td th:text="${#dates.formatISO(request.date)}"></td>
+                <td th:text="${#dates.formatISO(request.creationDate)}"></td>
+                <td th:text="${#dates.formatISO(request.realisationDate)}"></td>
+
+                <td th:text="${request.priority}"></td>
+                <td th:text="${request.status}"></td>
+                <td th:text="${request.description}"></td>
+                <td th:text="${request.idUser.idUser}"></td>
+                <td th:text="${request.idLocation.idLocation}"></td>
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>

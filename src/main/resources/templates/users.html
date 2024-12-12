@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Users</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
         <h2>Liste des utilisateurs: </h2>
-        <p th:text="${#lists.size(usersList)}"></p>
         <table border="1px">
             <tr>
                 <td>id_user</td>
@@ -14,15 +14,24 @@
                 <td>lastname</td>
                 <td>firstname</td>
                 <td>role_user</td>
-                <td>password.user</td>
+                <td>Action</td>
             </tr>
-            <tr th:each="user : ${usersLis}">
-                <td th:text="${user.id_user}"></td>
+            <tr th:each="user : ${usersList}">
+                <td><a th:href="@{/users/{id}(id=${user.idUser})}" th:text="${user.idUser}" ></a></td>
                 <td th:text="${user.registration}"></td>
                 <td th:text="${user.lastname}"></td>
                 <td th:text="${user.firstname}"></td>
-                <td th:text="${user.role_user}"></td>
-                <td th:text="${user.password.user}"></td>
+                <td th:text="${user.roleUser}"></td>
+                <td>
+                    <form th:action="@{/action_user/{id} (id=${user.idUser})}" method="get">
+                        <button type="submit" name="action" value="delete">Delete</button>
+                        <button type="submit" name="action" value="update">Update</button>
+                    </form>
+
+
+                </td>
+
+
             </tr>
 
         </table>

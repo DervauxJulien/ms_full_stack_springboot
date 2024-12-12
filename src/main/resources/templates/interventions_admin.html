@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Liste des interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>ID</td>
+                <td>description</td>
+                <td>User</td>
+                <td>date de creation</td>
+                <td>date d'affectation</td>
+                <td>date de réalisation</td>
+
+                <td>priorité</td>
+                <td>Prise en charge</td>
+                <td>Réalisé</td>
+            </tr>
+            <tr th:each="intervention : ${interventionsList}">
+                <td ><a th:text="${intervention.idIntervention}" th:href="@{/interventions_admin/{id}(id=${intervention.idIntervention})}"></a></td>
+                <td th:text="${intervention.description}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
+                <td th:text="${intervention.creationDate}"></td>
+                <td th:text="${intervention.affectationDate}"></td>
+                <td th:text="${intervention.realisationDate}"></td>
+
+
+<!--                <td th:text="${intervention.priority}"></td>-->
+
+                <form th:action="@{/update_priority_admin}" method="POST">
+                    <input th:value="${intervention.idIntervention}" name="idIntervention" hidden>
+                    <td th:if="${intervention.priority == null}">
+                        <span>high</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="high">
+                        <span>medium</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="medium">
+                        <span>low</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="low">
+                    </td>
+
+                    <td th:if="${intervention.priority == 'low'}">
+                        <span>high</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="high">
+                        <span>medium</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="medium">
+                        <span>low</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" checked value="low">
+                    </td>
+                    <td th:if="${intervention.priority == 'medium'}">
+                        <span>high</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="high">
+                        <span>medium</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" checked value="medium">
+                        <span>low</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="low">
+                    </td>
+                    <td th:if="${intervention.priority == 'high'}">
+                        <span>high</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" checked value="high">
+                        <span>medium</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="medium">
+                        <span>low</span>
+                        <input type="radio" onchange="this.form.submit()" name="check" value="low">
+                    </td>
+                </form>
+                <td>
+                    <form th:action="@{/update_intervenant_admin}" method="POST">
+                        <input th:value="${intervention.idIntervention}" name="idIntervention" hidden>
+                       <select name="intervenant" onchange="this.form.submit()">
+                        <option th:if="${intervenant == null}" value="">Choisir un intervenant</option>
+
+                        <option th:each="intervenant : ${intervenants}"
+                                th:unless="${intervenant == null}"
+                                th:value="${intervenant.idUser}"
+                                th:text="${intervenant.firstname} + ' ' + ${intervenant.lastname}"
+                                th:selected="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == intervenant.idUser}">
+                        </option>
+                    </select>
+                   </form>
+                </td>
+                <td th:text="${intervention.status}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Liste des interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>ID</td>
+                <td>description</td>
+                <td>Id User</td>
+                <td>date de creation</td>
+                <td>priorité</td>
+                <td>Prise en charge</td>
+                <td>Réalisé</td>
+<!--
+                <td>date de réalisation</td>
+                <td>date d'affectation</td>
+                <td>Status</td>
+                <td>Id location</td>
+                <td>date</td>
+                -->
+            </tr>
+            <tr>
+                <td th:text="${intervention.idIntervention}" ></td>
+                <td th:text="${intervention.description}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
+                <td th:text="${intervention.creationDate}"></td>
+                <td th:text="${intervention.priority}"></td>
+                <td >
+                    <span th:if="${intervention.idIntervenant == null }"></span>
+                    <span th:unless="${intervention.idIntervenant == null}" th:text="${intervention.idIntervenant.firstname}+ ' ' +${intervention.idIntervenant.lastname} "></span>
+                </td>
+                <td th:text="${intervention.status}"></td>
+
+
+<!--
+                <td th:text="${intervention.date}"></td>
+                <td th:text="${intervention.realisation_date}"></td>
+                <td th:text="${intervention.affectation_date}"></td>
+                <td th:text="${intervention.id_location.id_location}"></td>
+
+                -->
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>
