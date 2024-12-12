@@ -36,12 +36,11 @@ public class InterventionRestController {
         return interventionService.getById(id);
     }
 
-    @PostMapping("/intervention_update_priority")
-    public String updatePriority(@RequestBody Map<String, Object> requestBody){
+    @PutMapping("/intervention_update_priority")
+    public Intervention updatePriority(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
         intervention.setPriority((String) requestBody.get("priority"));
-        interventionService.updateIntervention(intervention);
-        return "Priorité modifiée";
+        return interventionService.updateIntervention(intervention);
     }
 
     @PutMapping("/intervention_update_status")
