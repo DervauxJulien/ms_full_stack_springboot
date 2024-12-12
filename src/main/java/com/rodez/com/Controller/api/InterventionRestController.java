@@ -132,6 +132,11 @@ public class InterventionRestController {
         Intervention intervention = new Intervention();
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
         Location location = locationService.getLocationById((Integer) requestBody.get("idLocation")).get();
+        String priority = (String) requestBody.get("priority");
+        if(priority != null){
+            intervention.setPriority(priority);
+        }
+
         intervention.setIdUser(user);
         intervention.setIdLocation(location);
         intervention.setDescription((String) requestBody.get("description"));
