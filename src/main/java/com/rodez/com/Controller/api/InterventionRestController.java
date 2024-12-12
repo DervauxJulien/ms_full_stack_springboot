@@ -51,6 +51,8 @@ public class InterventionRestController {
         System.out.println(status);
         if(status.equals("en cours") || status.equals("réalisé") || status.equals("en attente") || status.equals("traité")){
             intervention.setStatus(status);
+            if(status.equals("réalisé"))
+                intervention.setIdIntervenant(null);
             interventionService.updateIntervention(intervention);
         }
         else{
