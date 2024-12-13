@@ -38,9 +38,13 @@ public class InterventionRestController {
 
     @PutMapping("/intervention_update_priority")
     public Intervention updatePriority(@RequestBody Map<String, Object> requestBody){
-        Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
-        intervention.setPriority((String) requestBody.get("priority"));
-        return interventionService.updateIntervention(intervention);
+        String priority = (String) requestBody.get("priority");
+        if(priority.equals("low") || priority.equals("medium") || priority.equals("high")){
+            Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
+            intervention.setPriority(priority);
+            return interventionService.updateIntervention(intervention);
+        }
+        return null;
     }
 
     @PutMapping("/intervention_update_status")
