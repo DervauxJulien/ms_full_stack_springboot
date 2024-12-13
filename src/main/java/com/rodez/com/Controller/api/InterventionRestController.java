@@ -50,8 +50,33 @@ public class InterventionRestController {
         System.out.println(status);
         if(status.equals("en cours") || status.equals("réalisé") || status.equals("en attente") || status.equals("traité")){
             intervention.setStatus(status);
-            if(status.equals("réalisé"))
+            Timestamp realisationDate = intervention.getRealisationDate();
+            Timestamp validationDate = intervention.getDate();
+            Timestamp affectationDate = intervention.getAffectationDate();
+            if (status.equals("en attente")){
+                validationDate = null;
+                affectationDate = null;
+                realisationDate = null;
+            }
+            if (status.equals("en cours")){
+                affectationDate = Timestamp.valueOf(LocalDateTime.now());
+                realisationDate = null;
+                if(validationDate==null)validationDate=affectationDate;
+            }
+            if (status.equals("traité")){
+                validationDate = Timestamp.valueOf(LocalDateTime.now());
+                affectationDate = null;
+                realisationDate = null;
+            }
+            if(status.equals("réalisé")) {
                 intervention.setIdIntervenant(null);
+                realisationDate = Timestamp.valueOf(LocalDateTime.now());
+                if(affectationDate==null)affectationDate=realisationDate;
+                if(validationDate==null)validationDate=realisationDate;
+            }
+            intervention.setDate(validationDate);
+            intervention.setRealisationDate(realisationDate);
+            intervention.setAffectationDate(affectationDate);
             interventionService.updateIntervention(intervention);
         }
         else{
@@ -85,8 +110,6 @@ public class InterventionRestController {
             }
         }
 
-
-
         intervention.setAffectationDate(timestamp);
         interventionService.updateIntervention(intervention);
         return s;
@@ -94,7 +117,6 @@ public class InterventionRestController {
     @PostMapping("/interventions_user")
     public List<Object> interventionsList(@RequestBody Map<String, Object> requestBody){
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
-
 
         Iterable<Intervention> listInterventions = null;
         List<Object> list = null;
