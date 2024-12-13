@@ -35,7 +35,10 @@ public class InterventionRestController {
     public Optional<Intervention> interventionId (@PathVariable("id") Integer id){
         return interventionService.getById(id);
     }
-
+    /*
+    Update la priority d'une intervention
+    Check si on reçoit "low", "medium", "high" et return l'intervention updated, sinon return null
+     */
     @PutMapping("/intervention_update_priority")
     public Intervention updatePriority(@RequestBody Map<String, Object> requestBody){
         String priority = (String) requestBody.get("priority");
@@ -46,7 +49,11 @@ public class InterventionRestController {
         }
         return null;
     }
-
+    /*
+    Update le status d'une intervention
+    Check si on reçoit "en attente", "traité", "en cours" ou "réalisé", update le status de l'intervention et renvoie le status (String), sinon renvoie "Mauvais status"
+    Gère également la création/suppression des dates correspondantes en fonction du status
+     */
     @PutMapping("/intervention_update_status")
     public String updateStatus(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
@@ -89,10 +96,15 @@ public class InterventionRestController {
 
         return status;
     }
+
+    /*
+    Update l'intervenant d'une intervention
+    Verifie s'il est dans la base de données, puis s'il est admin ou formateur et modifie l'intervenant
+     */
     @PostMapping("/intervention_update_intervenant")
     public String updateIntervenant(@RequestBody Map<String, Object> requestBody){
         Intervention intervention = interventionService.getIntervention((Integer) requestBody.get("idIntervention"));
-        Optional<User> opt = null;
+        Optional<User> opt;
         User user = null;
 
         Timestamp timestamp = null;
@@ -100,14 +112,18 @@ public class InterventionRestController {
 
         if(requestBody.get("idIntervenant") != null) {
             opt = userService.getUserById((Integer) requestBody.get("idIntervenant"));
-//        System.out.println("--------------------"+opt.isPresent());
             if(opt.isPresent()){
                 user = opt.get();
             }
-            if(user != null && (user.getRoleUser().equals("admin") || user.getRoleUser().equals("formateur"))){
-                intervention.setIdIntervenant(user);
-                timestamp = Timestamp.valueOf(LocalDateTime.now());
-                s= "Intervenant modifié";
+            if(user != null){
+                if(user.getRoleUser().equals("admin") || user.getRoleUser().equals("formateur")){
+                    intervention.setIdIntervenant(user);
+                    timestamp = Timestamp.valueOf(LocalDateTime.now());
+                    s= "Intervenant modifié";
+                }
+                else {
+                    s = "Cet utilisateur n'est pas un intervenant";
+                }
             }
             else{
                 s = "Intervenant pas dans la base";
@@ -118,6 +134,10 @@ public class InterventionRestController {
         interventionService.updateIntervention(intervention);
         return s;
     }
+
+    /*
+    Return la list des interventions d'un utilisateur, ou toutes les interventions si le role de l'utilisateur est admin ou formateur
+     */
     @PostMapping("/interventions_user")
     public List<Object> interventionsList(@RequestBody Map<String, Object> requestBody){
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
