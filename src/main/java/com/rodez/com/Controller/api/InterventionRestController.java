@@ -179,9 +179,17 @@ public class InterventionRestController {
         Intervention intervention = new Intervention();
         User user = userService.getUserById((Integer) requestBody.get("idUser")).get();
         Location location = locationService.getLocationByName((String) requestBody.get("nameLocation"));
+        if(location == null){
+            throw new Error("Localisation mauvaise");
+        }
         String priority = (String) requestBody.get("priority");
         if(priority != null){
-            intervention.setPriority(priority);
+            if(priority.equals("high") || priority.equals("medium") || priority.equals("low")){
+                intervention.setPriority(priority);
+            }
+            else{
+                throw new Error("Priorité pas au bon format (high, medium ou low)");
+            }
         }
 
         intervention.setIdUser(user);
