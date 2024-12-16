@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Confirmation de suppression user</title>
+    </head>
+    <body>
+        <h2>Confirmation de la suppression user :
+            <p>Suppression de l'utilsateur <span th:text="'d\'ID :'+${user_deleted.idUser}+' '+${user_deleted.firstname}+' '+${user_deleted.lastname}"></span> réussie </p>
+            <a href="/users">Back to users</a>
+    </body>
+</html>

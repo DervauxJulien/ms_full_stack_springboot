@@ -7,22 +7,23 @@ import jakarta.persistence.*;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_location;
-    private String name_location;
+    private int idLocation;
+    @Column(name="nameLocation")
+    private String nameLocation;
 
-    public int getId_location() {
-        return id_location;
+    public int getIdLocation() {
+        return idLocation;
     }
 
-    public void setId_location(int id_location) {
-        this.id_location = id_location;
+    public void setIdLocation(int idLocation) {
+        this.idLocation = idLocation;
     }
 
-    public String getName_location() {
-        return name_location;
+    public String getNameLocation() {
+        return nameLocation;
     }
 
-    public void setName_location(String name_location) {
-        this.name_location = name_location;
+    public void setNameLocation(String nameLocation) {
+        this.nameLocation = nameLocation;
     }
 }

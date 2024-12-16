@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interventions</title>
+    </head>
+    <body>
+        <h2>Liste des interventions : </h2>
+        <table border="1px">
+            <tr>
+                <td>ID</td>
+                <td>description</td>
+                <td>User</td>
+                <td>date de creation</td>
+                <td>date de validation</td>
+                <td>date d'affectation</td>
+                <td>date de réalisation</td>
+                <td>priorité</td>
+                <td>Prise en charge</td>
+                <td>Status</td>
+                <td>Id location</td>
+            </tr>
+            <tr th:each="intervention : ${interventionsList}">
+                <td ><a th:text="${intervention.idIntervention}" th:href="@{/interventions_admin/{id}(id=${intervention.idIntervention})}"></a></td>
+                <td th:text="${intervention.description}"></td>
+                <td th:text="${intervention.idUser.firstname}"></td>
+                <td th:text="${intervention.creationDate}"></td>
+                <td th:text="${intervention.date}"></td>
+                <td th:text="${intervention.affectationDate}"></td>
+                <td th:text="${intervention.realisationDate}"></td>
+                <td th:text="${intervention.priority}"></td>
+                <form th:action="@{/update_intervenant_formateur/{id}(id=${idUser})}" method="POST">
+                    <input id="idIntervention" th:value="${intervention.idIntervention}" name="idIntervention" hidden>
+                    <td th:if="${intervention.idIntervenant == null}">
+                        <input type="checkbox" onchange="this.form.submit()" name="check">
+                        <span>Me positionner</span>
+                    </td>
+
+                    <td th:if="${intervention.idIntervenant != null and intervention.idIntervenant.idUser == idUser}">
+                        <span th:text="${intervention.idIntervenant.firstname} + ' ' + ${intervention.idIntervenant.lastname}"></span>
+                        <input type="checkbox" onchange="this.form.submit()" name="check" checked>
+                    </td>
+                    <td th:if="${intervention.idIntervenant != null and intervention.idIntervenant.idUser != idUser}">
+                        <span th:text="${intervention.idIntervenant.firstname} + ' ' + ${intervention.idIntervenant.lastname}"></span>
+                    </td>
+
+                </form>
+                <td th:text="${intervention.status}"></td>
+                <td th:text="${intervention.idLocation.nameLocation}"></td>
+            </tr>
+
+        </table>
+
+
+    </body>
+</html>

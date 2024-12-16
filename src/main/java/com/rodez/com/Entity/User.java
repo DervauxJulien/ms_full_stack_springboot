@@ -1,39 +1,49 @@
 package com.rodez.com.Entity;
 
+import com.rodez.com.Validator.ImmatriculationValidatorInterface;
 import jakarta.persistence.*;
+
+
 
 @Entity
 @Table(name="\"USER\"")
-public class User {
+
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_user")
-    private int id_user;
+    @Column(name="idUser")
+    private int idUser;
+    @ImmatriculationValidatorInterface(regex = "^[A,U,P,F]+[0-9]{9}$", message = "Mauvais format d'immatriculation")
     @Column(name="registration")
-    private int resgistration;
+    private String registration;
+    @ImmatriculationValidatorInterface(regex = "^[A-Za-z]+$", message = "Mauvais format de nom")
     @Column(name="lastname")
     private String lastname;
+    @ImmatriculationValidatorInterface(regex = "^[A-Za-z]+$", message = "Mauvais format de prénom")
     @Column(name="firstname")
     private String firstname;
-    @Column(name="role_user")
-    private String role_user;
-    @Column(name="password_user")
-    private String password_user;
 
-    public int getId_user() {
-        return id_user;
+    @Column(name="roleUser")
+    private String roleUser;
+    @ImmatriculationValidatorInterface(regex = "[a-zA-Z0-9/*@-_?!]+", message = "Wrong password")
+    @Column(name="passwordUser")
+    private String passwordUser;
+
+
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
-    public int getResgistration() {
-        return resgistration;
+    public String getRegistration() {
+        return registration;
     }
 
-    public void setResgistration(int resgistration) {
-        this.resgistration = resgistration;
+    public void setRegistration(String resgistration) {
+        this.registration = resgistration;
     }
 
     public String getLastname() {
@@ -52,19 +62,19 @@ public class User {
         this.firstname = firstname;
     }
 
-    public String getRole_user() {
-        return role_user;
+    public String getRoleUser() {
+        return roleUser;
     }
 
-    public void setRole_user(String role_user) {
-        this.role_user = role_user;
+    public void setRoleUser(String roleUser) {
+        this.roleUser = roleUser;
     }
 
-    public String getPassword_user() {
-        return password_user;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setPassword_user(String password_user) {
-        this.password_user = password_user;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 }

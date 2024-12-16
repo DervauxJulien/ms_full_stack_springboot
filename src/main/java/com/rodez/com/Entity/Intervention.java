@@ -1,6 +1,8 @@
 package com.rodez.com.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
 
@@ -9,24 +11,46 @@ import java.sql.Timestamp;
 public class Intervention {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_intervention;
+    @Column(name="idIntervention")
+    private int idIntervention;
     // date de validation de la demande  non pas de l'intervention
     private Timestamp date;
-    private Timestamp creation_date;
-    private Timestamp realisation_date;
-    private Timestamp affectation_date;
+    private Timestamp creationDate;
+    private Timestamp realisationDate;
+    private Timestamp affectationDate;
     private String priority;
-    private String status;
+    private String status = "en attente";
+    @NotBlank(message = "Une intervention doit avoir une description")
     private String description;
-    private int id_user;
-    private int id_location;
 
-    public int getId_intervention() {
-        return id_intervention;
+    @ManyToOne
+    @JoinColumn(name="idIntervenant")
+    private User idIntervenant;
+
+    @ManyToOne
+    @JoinColumn(name="idUser")
+    private User idUser;
+    @OneToOne
+    @JoinColumn(name="idLocation")
+    @NotNull(message = "La localisation ne doit pas être null")
+    private Location idLocation;
+
+
+
+
+    public User getIdIntervenant() {
+        return idIntervenant;
     }
 
-    public void setId_intervention(int id_intervention) {
-        this.id_intervention = id_intervention;
+    public void setIdIntervenant(User idIntervenant) {
+        this.idIntervenant = idIntervenant;
+    }
+    public int getIdIntervention() {
+        return idIntervention;
+    }
+
+    public void setIdIntervention(int idIntervention) {
+        this.idIntervention = idIntervention;
     }
 
     public Timestamp getDate() {
@@ -37,28 +61,28 @@ public class Intervention {
         this.date = date;
     }
 
-    public Timestamp getCreation_date() {
-        return creation_date;
+    public Timestamp getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Timestamp creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Timestamp getRealisation_date() {
-        return realisation_date;
+    public Timestamp getRealisationDate() {
+        return realisationDate;
     }
 
-    public void setRealisation_date(Timestamp realisation_date) {
-        this.realisation_date = realisation_date;
+    public void setRealisationDate(Timestamp realisationDate) {
+        this.realisationDate = realisationDate;
     }
 
-    public Timestamp getAffectation_date() {
-        return affectation_date;
+    public Timestamp getAffectationDate() {
+        return affectationDate;
     }
 
-    public void setAffectation_date(Timestamp affectation_date) {
-        this.affectation_date = affectation_date;
+    public void setAffectationDate(Timestamp affectationDate) {
+        this.affectationDate = affectationDate;
     }
 
     public String getPriority() {
@@ -85,19 +109,19 @@ public class Intervention {
         this.description = description;
     }
 
-    public int getId_user() {
-        return id_user;
+    public User getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
     }
 
-    public int getId_location() {
-        return id_location;
+    public Location getIdLocation() {
+        return idLocation;
     }
 
-    public void setId_location(int id_location) {
-        this.id_location = id_location;
+    public void setIdLocation(Location idLocation) {
+        this.idLocation = idLocation;
     }
 }
