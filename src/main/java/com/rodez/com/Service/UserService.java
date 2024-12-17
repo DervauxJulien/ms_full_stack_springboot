@@ -4,6 +4,10 @@ import com.rodez.com.Entity.User;
 import com.rodez.com.Repository.users.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -11,7 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepositoryInterface userRepository ;
@@ -28,11 +34,14 @@ public class UserService {
 
     }
     public User createUser(User user ){
-        return userRepository.save(user);
+        User newUser = user;
+        newUser.setPasswordUser(passwordEncoder.encode(user.getPasswordUser()));
+        return userRepository.save(newUser);
     }
     public void deleteById(Integer id){
         userRepository.deleteById(id);
     }
+
     public User updateUser(User user){
         return userRepository.save(user);
     }
@@ -42,5 +51,13 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+
+    public boolean verifyPassword(String rowPassword, String dbPassword){
+        return passwordEncoder.matches(rowPassword, dbPassword);
+    }
 }
 

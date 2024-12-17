@@ -2,13 +2,22 @@ package com.rodez.com.Entity;
 
 import com.rodez.com.Validator.ImmatriculationValidatorInterface;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @Table(name="\"USER\"")
 
-public class User  {
+public class User implements UserDetails {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUser")
@@ -25,7 +34,8 @@ public class User  {
 
     @Column(name="roleUser")
     private String roleUser;
-    @ImmatriculationValidatorInterface(regex = "[a-zA-Z0-9/*@-_?!]+", message = "Wrong password")
+//    @ImmatriculationValidatorInterface(regex = "[a-zA-Z0-9/*@-_?!$]+", message = "Wrong password")
+    @NotBlank(message = "Password can't be empty")
     @Column(name="passwordUser")
     private String passwordUser;
 
@@ -77,4 +87,43 @@ public class User  {
     public void setPasswordUser(String passwordUser) {
         this.passwordUser = passwordUser;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordUser;
+    }
+
+    @Override
+    public String getUsername() {
+        return registration;
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        return null;
+    }
+
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return UserDetails.super.isAccountNonExpired();
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return UserDetails.super.isAccountNonLocked();
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return UserDetails.super.isCredentialsNonExpired();
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return UserDetails.super.isEnabled();
+//    }
 }

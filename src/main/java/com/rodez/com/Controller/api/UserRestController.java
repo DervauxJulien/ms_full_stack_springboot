@@ -17,6 +17,7 @@ public class UserRestController {
         return userService.listAll();
 
     }
+
     @GetMapping("users_admin_rest/{id}")
     public Optional<User> getUserById(@PathVariable ("id") Integer id) {
         return userService.getUserById(id);
@@ -30,15 +31,15 @@ public class UserRestController {
         String lastname = (String) requestBody.get("lastname");
         String firstname = (String) requestBody.get("firstname");
         String passwordUser = (String) requestBody.get("passwordUser");
+//        String hashPassword = "oé";
         Iterable<User> users = userService.listAll();
         List<User> userList = new ArrayList<User>();
         users.forEach(userList::add);
         boolean already = false;
         if((registration.charAt(0)== 'A' || registration.charAt(0)== 'F' || registration.charAt(0)== 'U' || registration.charAt(0)== 'P')) {
-            for (int i = 0; i < userList.size(); i++) {
-                if(registration.equals(userList.get(i).getRegistration())){
+            user = userService.getByRegistration(registration);
+                if(user != null){
                     throw new Error("Utilisateur déjà existant (matricule)");
-                }
             }
             user = new User();
             user.setRegistration(registration);
@@ -54,6 +55,7 @@ public class UserRestController {
 
         return user;
     }
+
     @DeleteMapping("/delete_user_rest")
     public void delete_User(@RequestBody Map<String, Object> requestBody){
         userService.deleteById((Integer) requestBody.get("idUser"));
@@ -79,6 +81,16 @@ public class UserRestController {
         }
         return userService.updateUser(user);
     }
+
+    @PostMapping("/login")
+    public Integer login(@RequestBody User user){
+        int  idUser = -1;
+       User dbUser = userService.getByRegistration(user.getRegistration());
+       if(dbUser != null && userService.verifyPassword(user.getPassword(),dbUser.getPassword())) {
+           idUser = dbUser.getIdUser();
+       }
+       return idUser;
+    };
 
 
 
