@@ -137,7 +137,6 @@ public class InterventionRestController {
         if(priority != null){
             intervention.setPriority(priority);
         }
-
         intervention.setIdUser(user);
         intervention.setIdLocation(location);
         intervention.setDescription((String) requestBody.get("description"));

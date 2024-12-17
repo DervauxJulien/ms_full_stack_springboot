@@ -100,12 +100,15 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return registration;
+        return firstname + lastname;
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         return null;
     }
+
+
+
 
 //    @Override
 //    public boolean isAccountNonExpired() {

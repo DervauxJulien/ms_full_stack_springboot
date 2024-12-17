@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepositoryInterface userRepository ;
+
     public Iterable<User> listAll(){
         return  userRepository.findAll(Sort.by(Sort.Direction.ASC, "idUser"));
     }
@@ -50,14 +52,13 @@ public class UserService implements UserDetailsService {
         return  userRepository.getByRegistration(registration);
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
-
     public boolean verifyPassword(String rowPassword, String dbPassword){
         return passwordEncoder.matches(rowPassword, dbPassword);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String registration) throws UsernameNotFoundException {
+        return userRepository.getByRegistration(registration);
     }
 }
 

@@ -16,8 +16,7 @@ public interface UserRepositoryInterface extends JpaRepository<User, Integer> {
     List<User> getAllIntervenant();
 
     List<User> findAll(Sort sort);
+
     @Query(value="SELECT * FROM \"USER\" WHERE ? = registration ", nativeQuery = true)
     User getByRegistration(String registration);
-
-
 }
